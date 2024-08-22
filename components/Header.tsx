@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import React, { Children } from "react";
@@ -6,10 +7,10 @@ import React, { Children } from "react";
 //     children : React.ReactNode;
 // }
 
-const Header = ({children}: HeaderProps) => {
+const Header = ({children, className}: HeaderProps) => {
   return (
     <>
-      <div className="header">
+      <div className={cn("header", className)}>
         <Link href="/" className="md:flex-1">
           <Image
             src="/assets/icons/logo.svg"
