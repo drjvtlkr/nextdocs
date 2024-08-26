@@ -1,7 +1,7 @@
 import AddDocumentBtn from "@/components/AddDocumentBtn";
 import { DeleteModal } from "@/components/DeleteModal";
 import Header from "@/components/Header";
-import { Notifications } from "@/components/Notifications";
+import Notifications from "@/components/Notifications";
 import { Button } from "@/components/ui/button";
 import { getDocuments } from "@/lib/actions/room.actions";
 import { dateConverter } from "@/lib/utils";
@@ -16,17 +16,21 @@ const Home = async () => {
   const clerkUser = await currentUser();
   if (!clerkUser) redirect("/sign-in");
 
-  const roomDocuments = await getDocuments(clerkUser.emailAddresses[0].emailAddress);
+  const roomDocuments = await getDocuments(
+    clerkUser.emailAddresses[0].emailAddress
+  );
+
   return (
     <main className="home-container">
       <Header className="sticky left-0 top-0">
         <div className="flex items-center gap-2 lg:gap-4">
-          <Notifications/>
+          <Notifications />
           <SignedIn>
             <UserButton />
           </SignedIn>
         </div>
       </Header>
+
       {roomDocuments.data.length > 0 ? (
         <div className="document-list-container">
           <div className="document-list-title">
@@ -42,9 +46,9 @@ const Home = async () => {
                 <Link
                   href={`/documents/${id}`}
                   className="flex flex-1 items-center gap-4">
-                  <div className=" hidden rounded-md bg-dark-500 p-2 sm:block">
+                  <div className="hidden rounded-md bg-dark-500 p-2 sm:block">
                     <Image
-                      src="/assests/icons/doc.svg"
+                      src="/assets/icons/doc.svg"
                       alt="file"
                       width={40}
                       height={40}
@@ -52,17 +56,18 @@ const Home = async () => {
                   </div>
                   <div className="space-y-1">
                     <p className="line-clamp-1 text-lg">{metadata.title}</p>
-                    <p className="text-sm font-light text-blue-100">Created about {dateConverter(createdAt)}</p>
+                    <p className="text-sm font-light text-blue-100">
+                      Created about {dateConverter(createdAt)}
+                    </p>
                   </div>
                 </Link>
-                {/* TODO: Add a delete button */}
-                <DeleteModal roomId={id}/>
+                <DeleteModal roomId={id} />
               </li>
             ))}
           </ul>
         </div>
       ) : (
-        <div>
+        <div className="document-list-empty">
           <Image
             src="/assets/icons/doc.svg"
             alt="Document"
