@@ -123,7 +123,7 @@ export const updateDocumentAccess = async({roomId, email, userType, updatedBy}:S
       })
     }
 
-    revalidatePath(`/document/${roomId}`)
+    revalidatePath(`/documents/${roomId}`)
     return parseStringify(room)
   } catch (error) {
     console.error(error);
@@ -146,7 +146,7 @@ export const removeCollaborator = async({roomId, email}: {roomId: string, email:
       }
     })
 
-    revalidatePath(`/document/${roomId}`)
+    revalidatePath(`/documents/${roomId}`)
     return parseStringify(updatedRoom)
   } catch (error) {
     console.error(error);
